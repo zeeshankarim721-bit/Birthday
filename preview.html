@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ItsSaherBirthday 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* START SCREEN */
+    .start-screen {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #000, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      flex-direction: column;
+      color: white;
+    }
+
+    .start-btn {
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 30px;
+      background: #ff4081;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 64, 129, 0.7);
+    }
+
+    /* SLIDESHOW */
+    .slideshow {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.1);
+      transition: opacity 2s ease-in-out, transform 6s ease-in-out;
+    }
+
+    .active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* TEXT */
+    .overlay-text {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      text-shadow: 0 0 20px rgba(0,0,0,0.8);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div class="start-screen" id="startScreen">
+  <h1>🎉 A Surprise for Saher 🎉</h1>
+  <button class="start-btn" onclick="startExperience()">Start Surprise 🎁</button>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="slideshow">
+  <img src="image1.jpg" class="slide">
+  <img src="image2.jpg" class="slide">
+  <img src="image3.jpg" class="slide">
+  <img src="image4.jpg" class="slide">
+
+  <div class="overlay-text">Happy Birthday Saher ❤️</div>
+</div>
+
+<audio id="bg-music" loop>
+  <source src="birthday-song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const slides = document.querySelectorAll(".slide");
+  let index = 0;
+  let started = false;
+
+  function showNextSlide() {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }
+
+  function startExperience() {
+    if (started) return;
+    started = true;
+
+    // Hide start screen
+    document.getElementById("startScreen").style.display = "none";
+
+    // Start music
+    const audio = document.getElementById("bg-music");
+    audio.play();
+
+    // Activate first slide
+    slides[0].classList.add("active");
+
+    // Start slideshow
+    setInterval(showNextSlide, 4000);
+  }
+</script>
+
+</body>
+</html>
